@@ -2,7 +2,7 @@ const home = async (req , res) => {
     try {
         res.status(200).send("Welcome to the controller home app!");    
     } catch (error) {
-        console.log('error');   
+        console.log('error');
     }
 }
 
