@@ -4,6 +4,7 @@ const app = express();
 const router = require('./router/auth-router');
 const connectDb = require('./utils/db')
 
+
 // Middleware to add in order to use json in express application
 // Placed before any routes to ensure it is available for all subsequent route handlers
 
