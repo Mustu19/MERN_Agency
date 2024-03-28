@@ -22,10 +22,11 @@ const register = async (req, res) => {
         // const hash_password = await bcrypt.hash(password, saltRound)
         // const userCreated = await User.create({ username, email, phone, password: hash_password})
 
-        const userCreated = await User.create({ username, email, phone, password})
+        const userCreated = await User.create({ username, email, phone, password })
 
-        res.status(201).json({ message: userCreated })
-    } catch (error) {
+        res.status(201).json({ message: "registration successful", token: await userCreated.generateToken(), userId: userCreated._id.toString() })
+    }
+    catch (error) {
         res.status(500).json({ error: error })
     }
 }
