@@ -1,4 +1,5 @@
-* {
+* 
+{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -26,8 +27,6 @@ body {
   /* min-width: 32rem; */
   min-height: 100vh;
 }
-
- /*?  Help me reach 1 Million subs 👉 https://youtube.com/thapatechnical */
 
 h1 {
   font-size: 5.4rem;
@@ -101,67 +100,83 @@ button {
   -o-transition: border-color 0.3s;
 }
 
+/*? state rules*/
+button:hover {
+  box-shadow: inset 0 0 0 0.2rem var(--bg-color);
+}
+
+a:hover,
+a:active {
+  color: #535bf2;
+}
+
 .secondary-btn {
   background-color: transparent;
   box-shadow: inset 0 0 0 0.2rem var(--btn-color);
   margin-left: 3.2rem;
 }
 
+
 /***** Hero Section *****/
 
-/* Hero Section */
 .section-hero {
-  align-items: center; /* Applied directly, as there is no "&.grid" in CSS */
+  & .grid {
+    align-items: center;
+  }
+
+  .hero-content {
+    & p {
+      margin: 2.4rem 0 4.8rem 0;
+
+      &:first-child {
+        margin: 0 0 1.2rem 0;
+      }
+    }
+  }
+
+  .hero-image {
+    display: flex;
+    justify-content: center;
+
+    & img {
+      width: 70%;
+      height: auto;
+    }
+  }
 }
 
-.section-hero .hero-content p {
-  margin: 2.4rem 0 4.8rem 0;
-}
+/***** End Hero  *****/
 
-.section-hero .hero-content p:first-child {
-  margin-bottom: 1.2rem;
-}
+/***** analytics Section *****/
 
-.section-hero .hero-image {
-  display: flex;
-  justify-content: center;
-}
-
-.section-hero .hero-image img {
-  width: 70%;
-  height: auto;
-}
-
-/* End Hero Section */
-
-/* Analytics Section */
 .section-analytics {
   margin: 9.6rem 0;
+
+  & .container {
+    background-color: var(--bg-color);
+    border-radius: 1rem;
+  }
+
+  & .grid {
+    color: var(--dark-color);
+
+    & .div1 {
+      text-align: center;
+      border-right: 0.2rem solid var(--dark-color);
+
+      &:last-child {
+        border: none;
+      }
+
+      & h2 {
+        font-size: 4.8rem;
+      }
+
+      & p {
+        text-transform: capitalize;
+      }
+    }
+  }
 }
 
-.section-analytics .container {
-  background-color: var(--bg-color);
-  border-radius: 1rem;
-}
-
-.section-analytics .grid {
-  color: var(--dark-color);
-}
-
-.section-analytics .grid .div1 {
-  text-align: center;
-  border-right: 0.2rem solid var(--dark-color);
-}
-
-.section-analytics .grid .div1:last-child {
-  border: none;
-}
-
-.section-analytics .grid .div1 h2 {
-  font-size: 4.8rem;
-}
-
-.section-analytics .grid .div1 p {
-  text-transform: capitalize;
-}
-/* End Analytics Section */
+/***** End analytics Section *****/
