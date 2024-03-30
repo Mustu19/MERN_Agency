@@ -20,9 +20,34 @@ export const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(user);
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/auth/login/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user),
+      });
+
+      console.log("login form", response);
+
+      if (response.ok) {
+        alert("Login Successful");
+        setUser({
+          email: '',
+          password: ''
+        })
+        navigate("/")
+      }
+      else {
+        console.log("invalid credential");
+      }
+
+    } catch (error) {
+      console.log("login" + error);
+    }
   }
 
   return (
