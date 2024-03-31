@@ -1,12 +1,14 @@
 import { useState } from "react";
 import {useAuth} from "../store/auth"
 
+const defaultContactFormData = {
+  username: "",
+  email: "",
+  message: "",
+};
+
 export const Contact = () => {
-  const [contact, setContact] = useState({
-    username: "",
-    email: "",
-    message: "",
-  });
+  const [contact, setContact] = useState(defaultContactFormData);
 
   const {user} = useAuth();
 
@@ -33,10 +35,32 @@ export const Contact = () => {
   };
 
   // handle fomr getFormSubmissionInfo
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     console.log(contact);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/form/contact" , {
+        method: "POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contact),
+      });
+
+      console.log("Respones: " , response);
+
+      if(response.ok){
+        setContact(defaultContactFormData)
+        const responseData = await response.json();
+        alert(responseData)
+        console.log(responseData);
+        alert("message send successfully")
+      }
+    } catch (error) { 
+      console.log(error);
+    }
+
   };
 
   return (
