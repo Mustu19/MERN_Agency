@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
 
 export const Login = () => {
   const [user, setUser] = useState({
@@ -36,16 +37,17 @@ export const Login = () => {
       console.log("login form", response);
       const res_data = await response.json();
       if (response.ok) {
-        alert("Login Successful");
+        // alert("Login Successful");
         storeTokenInLS(res_data.token);
         setUser({
           email: '',
           password: ''
         })
+        toast.success("Login successfull")
         navigate("/")
       }
       else {
-        alert(res_data.extraDetails ? res_data.extraDetails : res_data.message)
+        toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message)
         console.log("invalid credential");
       }
 
@@ -96,7 +98,7 @@ export const Login = () => {
                   </div>
                   <br />
                   <button type="submit" className="btn btn-submit">
-                    Register Now
+                    Login Now
                   </button>
                 </form>
               </div>

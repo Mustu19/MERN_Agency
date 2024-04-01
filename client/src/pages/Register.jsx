@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
 
 export const Register = () => {
 
@@ -53,10 +54,11 @@ export const Register = () => {
           phone: '',
           password: ''
         })
+        toast.success("Registration successfull")
         navigate("/login")
       }
       else{
-        alert(res_data.extraDetails ? res_data.extraDetails : res_data.message)
+        toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message)
       }
 
       console.log(response);
