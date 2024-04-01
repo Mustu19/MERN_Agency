@@ -34,10 +34,9 @@ export const Login = () => {
       });
 
       console.log("login form", response);
-
+      const res_data = await response.json();
       if (response.ok) {
         alert("Login Successful");
-        const res_data = await response.json();
         storeTokenInLS(res_data.token);
         setUser({
           email: '',
@@ -46,6 +45,7 @@ export const Login = () => {
         navigate("/")
       }
       else {
+        alert(res_data.extraDetails ? res_data.extraDetails : res_data.message)
         console.log("invalid credential");
       }
 

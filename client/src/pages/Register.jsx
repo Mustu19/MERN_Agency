@@ -40,12 +40,11 @@ export const Register = () => {
         body: JSON.stringify(user),
       })
 
+      const res_data = await response.json();
+      console.log("res from server", res_data);
 
       if (response.ok) {
-
-        const res_data = await response.json();
-        console.log("res from server", res_data);
-
+        // stored the token in localhost
         storeTokenInLS(res_data.token);
         
         setUser({
@@ -55,6 +54,9 @@ export const Register = () => {
           password: ''
         })
         navigate("/login")
+      }
+      else{
+        alert(res_data.extraDetails ? res_data.extraDetails : res_data.message)
       }
 
       console.log(response);
@@ -102,6 +104,7 @@ export const Register = () => {
                       value={user.email}
                       onChange={handleInput}
                       placeholder="email"
+                      required
                     />
                   </div>
                   <div>
