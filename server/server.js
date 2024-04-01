@@ -8,8 +8,6 @@ const serviceRoute = require('./router/service-router');
 const adminRoute = require('./router/admin-router')
 const connectDb = require('./utils/db')
 const errorMiddleware = require('./middlewares/error-middleware');
-const { coerce } = require("zod");
-
 
 // Middleware to add in order to use json in express application
 // Placed before any routes to ensure it is available for all subsequent route handlers
