@@ -1,7 +1,7 @@
 import { useAuth } from "../store/auth";
 
 export const Service = () => {
-  const { services } = useAuth();
+  const { services} = useAuth();
 
   return (
     <section className="section-services">
