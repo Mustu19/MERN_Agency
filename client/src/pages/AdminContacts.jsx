@@ -1,7 +1,68 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { useAuth } from '../store/auth'
 
 export const AdminContacts = () => {
+
+  const [contacts, setContacts] = useState([]);
+
+  const { authorizationToken } = useAuth()
+
+  const getAllContactsData = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/admin/contacts`, {
+        method: "GET",
+        headers: {
+          Authorization: authorizationToken
+        },
+      })
+      const data = await response.json()
+      console.log(`contacts ${data}`);
+      if (response.ok) {
+        setContacts(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getAllContactsData()
+  }, [])
+
   return (
-    <div>AdminContacts</div>
+    <>
+      <section className="admin-contacts-section">
+        <div className="container">
+          <h1>Admin Contacts Data </h1>
+        </div>
+        <div className="container admin-users">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {contacts.map((curContact, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{curContact.username}</td>
+                    <td>{curContact.email}</td>
+                    <td>{curContact.message}</td>
+                    <td>
+                      <button className="btn"> Delete </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </>
   )
 }
