@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useAuth } from '../store/auth'
+import { toast } from "react-toastify";
 
 export const AdminContacts = () => {
 
@@ -25,6 +26,27 @@ export const AdminContacts = () => {
       console.log(error);
     }
   }
+
+   // defining the funciton deleteContactById
+
+   const deleteContactById = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/admin/contacts/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: authorizationToken,
+        },
+      });
+      if (response.ok) {
+        getAllContactsData();
+        toast.success("deleted successfully");
+      } else {
+        toast.error("Not Deleted ");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     getAllContactsData()
@@ -54,7 +76,7 @@ export const AdminContacts = () => {
                     <td>{curContact.email}</td>
                     <td>{curContact.message}</td>
                     <td>
-                      <button className="btn"> Delete </button>
+                      <button className="btn" onClick={() => deleteContactById(curContact._id)}> Delete </button>
                     </td>
                   </tr>
                 );
